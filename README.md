@@ -1,6 +1,6 @@
 # Site for the Mood
 
-[TODO. There will be project description]
+Funny quotes, [test it](https://b00bl1k.ru/20_mood/)!
 
 # Project Goals
 

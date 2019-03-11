@@ -2,24 +2,80 @@
 <html>
 <head>
   <title>Настроение</title>
-  <script id="quotes_json" type="application/json">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <style>
+    .container {
+      text-align: center;
+    }
+    .balloon {
+      font-family: 'Roboto', sans-serif;
+      max-width: 400px;
+      padding: 10px;
+      display: inline-block;
+      border-radius: 4px;
+      border: 2px solid #5fba7d;
+      color: #1a1a4e;
+    }
+    .sign {
+      text-align: right;
+      color: #777;
+    }
+  </style>
+  <script id="js-quotes-json" type="application/json">
     [
       {
         "phrase": "Кукурузные хлопья - теперь без асбеста!",
         "signature": "©Неизвестный маркетолог"
       },
       {
-        "phrase": "Собираюсь жить вечно, пока всё идёт нормально"
+        "phrase": "Мелочь, а приятно. А если приятно, то это уже не мелочь."
       },
       {
-        "phrase": "Вывеска над кафе — '\u003cМы открылись\u003e'. Что-то не так. Где же '\u003c/Мы открылись\u003e'?"
+        "phrase": "Диплом позволяет ошибаться значительно увереннее."
       },
       {
-        "phrase": "Если ты будешь усердно работать по 8 часов в день, то обязательно станешь боссом и начнешь работать по 12"
+        "phrase": "Маленький мальчик смеяться любил... Сделает гадость, и ржёт как дебил..."
       }
     ]
   </script>
+  <script id="js-balloon-tpl" type="text/template">
+    <div class="balloon">
+      <p class="js-body"></p>
+      <p class="sign">&mdash; <span class="js-author"></span></p>
+    </div>
+  </script>
 </head>
 <body>
+  <section>
+    <div id="js-container" class="container"></div>
+  </section>
+  <script>
+    function getRandomQuote()
+    {
+      var quotesJson = document.getElementById('js-quotes-json')
+      var quotesList = JSON.parse(quotesJson.textContent || quotesJson.innerText)
+      var randomIndex = Math.floor(Math.random() * quotesList.length)
+      return quotesList[randomIndex]
+    }
+
+    function showMessage(text, author)
+    {
+      var template = document.getElementById('js-balloon-tpl').innerText
+      var container = document.getElementById('js-container')
+      var wrapper = document.createElement('div')
+
+      wrapper.innerHTML = template
+      container.insertBefore(wrapper, container.firstChild)
+
+      var body_el = wrapper.getElementsByClassName('js-body')[0]
+      var author_el = wrapper.getElementsByClassName('js-author')[0]
+
+      body_el.innerHTML = text
+      author_el.innerHTML = author
+    }
+
+    var quote = getRandomQuote()
+    showMessage(quote.phrase, quote.signature || "Неизвестно")
+  </script>
 </body>
 </html>
