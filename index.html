@@ -28,6 +28,9 @@
         "signature": "©Неизвестный маркетолог"
       },
       {
+        "phrase": "Вывеска над кафе — '\u003cМы открылись\u003e'. Что-то не так. Где же '\u003c/Мы открылись\u003e'?"
+      },
+      {
         "phrase": "Мелочь, а приятно. А если приятно, то это уже не мелочь."
       },
       {
@@ -70,8 +73,8 @@
       var body_el = wrapper.getElementsByClassName('js-body')[0]
       var author_el = wrapper.getElementsByClassName('js-author')[0]
 
-      body_el.innerHTML = text
-      author_el.innerHTML = author
+      body_el.textContent = text
+      author_el.textContent = author
     }
 
     var quote = getRandomQuote()
